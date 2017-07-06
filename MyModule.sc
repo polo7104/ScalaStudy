@@ -22,6 +22,12 @@ def fibonacci(m: Int): Int = {
 }
 //fibonacci(4)
 
+//Higher Order Function
+def formatResult(name: String, n: Int, f: Int => Int) = {
+  val msg = "The %s of %d is %d."
+  msg.format(name, n, f(n))
+}
 
+formatResult("fibonacci number", 5, fibonacci)
 
 
