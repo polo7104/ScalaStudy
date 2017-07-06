@@ -27,7 +27,36 @@ def formatResult(name: String, n: Int, f: Int => Int) = {
   val msg = "The %s of %d is %d."
   msg.format(name, n, f(n))
 }
+//formatResult("fibonacci number", 5, fibonacci)
 
-formatResult("fibonacci number", 5, fibonacci)
+def findFirst[T](arr: Array[T], f: T => Boolean): Int = {
+  @annotation.tailrec
+  def loop(n: Int): Int = {
+    if(n >= arr.length) -1
+    else if(f(arr(n))) n
+    else loop(n+1)
+  }
+  loop(0)
+}
 
+//findFirst( Array("a","b","c","d"), (x: String) => x == "c" )
 
+def isSorted[A](arr: Array[A], f: (A,A) => Boolean): Boolean = {
+  var bl = false
+  @annotation.tailrec
+  def loop(n: Int): Boolean = {
+    if(n >= arr.length - 1) bl
+    else if( f(arr(n), arr(n+1)) ){
+      bl = true
+      loop(n+1)
+    }
+    else{
+      false
+    }
+  }
+  loop(0)
+}
+// asc
+isSorted(Array(1,2,3,4,5,7,8,10), (x: Int, y: Int) => x < y)
+// desc
+isSorted(Array(1,2,3,4,5,7,8,10).reverse, (x: Int, y: Int) => x > y)
